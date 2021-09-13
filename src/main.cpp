@@ -7,6 +7,9 @@
 #include "route_model.h"
 #include "render.h"
 #include "route_planner.h"
+using std::cin;
+using std::cout;
+using std::endl;
 
 using namespace std::experimental;
 
@@ -56,11 +59,32 @@ int main(int argc, const char **argv)
     // user input for these values using std::cin. Pass the user input to the
     // RoutePlanner object below in place of 10, 10, 90, 90.
 
+    float start_x;
+    float start_y;
+    float end_x;
+    float end_y;
+    
+    cout << "Enter start_x: " << endl;
+    cin >> start_x;
+    cout << "Enter start_y: " << endl;
+    cin >> start_y;
+    cout << "Enter end_x: " << endl;
+    cin >> end_x;
+    cout << "Enter end_y: " << endl;
+    cin >> end_y;
+
+
+    
+
     // Build Model.
     RouteModel model{osm_data};
 
     // Create RoutePlanner object and perform A* search.
-    RoutePlanner route_planner{model, 10, 10, 90, 90};
+    // RoutePlanner route_planner{model, 10, 10, 90, 90};
+    RoutePlanner route_planner{model, start_x, start_y, end_x, end_y};
+
+    // cout << "Distance between nodes: " << RoutePlanner::CalculateHValue(route_planner.start_node) << endl;
+
     route_planner.AStarSearch();
 
     std::cout << "Distance: " << route_planner.GetDistance() << " meters. \n";
